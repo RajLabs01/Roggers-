@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roggers AI</title>
+
+  <style>
+    body {
+      background: #10131a;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #00d9ff;
+    }
+
+    p {
+      color: #b8c0cc;
+    }
+
+    button {
+      background: #00d9ff;
+      color: #10131a;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>ROGGERS AI</h1>
+
+  <p>Your personal engineering assistant.</p>
+
+  <button onclick="showMessage()">Initialize Roggers</button>
+
+  <p id="status">System: Offline</p>
+
+  <script>
+    function showMessage() {
+      document.getElementById("status").innerText =
+        "System: Initialized. Roggers is ready for development.";
+    }
+  </script>
+
+</body>
+</html>
