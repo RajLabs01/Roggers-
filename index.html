@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,49 +7,182 @@
   <title>Roggers AI</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #10131a;
-      color: white;
+      margin: 0;
+      background: #0b0f17;
+      color: #e8edf5;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px 20px;
     }
 
-    h1 {
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #263040;
       color: #00d9ff;
+      font-size: 22px;
+      font-weight: bold;
     }
 
-    p {
-      color: #b8c0cc;
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    #chat {
+      min-height: 65vh;
+      padding-bottom: 20px;
+    }
+
+    .message {
+      margin: 14px 0;
+      padding: 14px;
+      border-radius: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .user {
+      background: #173047;
+      margin-left: 15%;
+    }
+
+    .assistant {
+      background: #171e2a;
+      margin-right: 15%;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      position: sticky;
+      bottom: 0;
+      background: #0b0f17;
+      padding: 12px 0;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #303b4d;
+      background: #151c27;
+      color: white;
+      font-size: 16px;
     }
 
     button {
-      background: #00d9ff;
-      color: #10131a;
+      padding: 14px 18px;
       border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 10px;
+      background: #00d9ff;
+      color: #071018;
+      font-weight: bold;
       cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+    }
+
+    footer {
+      color: #718096;
+      text-align: center;
+      font-size: 12px;
+      padding: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>ROGGERS AI</h1>
+  <header>ROGGERS AI</header>
 
-  <p>Your personal engineering assistant.</p>
+  <main>
+    <div id="chat">
+      <div class="message assistant">
+        Roggers initialized.
 
-  <button onclick="showMessage()">Initialize Roggers</button>
+        I'm your personal engineering assistant.
+        This is the first interface prototype.
+      </div>
+    </div>
 
-  <p id="status">System: Offline</p>
+    <div class="input-area">
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Message Roggers..."
+        autocomplete="off"
+      >
+
+      <button id="sendButton">Send</button>
+    </div>
+  </main>
+
+  <footer>
+    Roggers AI · Early Development Prototype
+  </footer>
 
   <script>
-    function showMessage() {
-      document.getElementById("status").innerText =
-        "System: Initialized. Roggers is ready for development.";
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
+
+    function addMessage(text, role) {
+      const message = document.createElement("div");
+
+      message.className = "message " + role;
+      message.textContent = text;
+
+      chat.appendChild(message);
     }
+
+    function getResponse(text) {
+      const message = text.toLowerCase();
+
+      if (message.includes("hello") || message.includes("hi")) {
+        return "Hello, Raj. Roggers interface is operational.";
+      }
+
+      if (message.includes("robot")) {
+        return "Let's discuss your robotics project. What are we building?";
+      }
+
+      if (message.includes("who are you")) {
+        return "I'm Roggers, your personal engineering assistant prototype.";
+      }
+
+      return "Message received: " + text +
+        "\n\nThis is a demo response. Real AI integration is not connected yet.";
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      addMessage(text, "user");
+
+      const response = getResponse(text);
+
+      addMessage(response, "assistant");
+
+      input.value = "";
+      input.focus();
+    }
+
+    sendButton.addEventListener("click", sendMessage);
+
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
   </script>
 
 </body>
